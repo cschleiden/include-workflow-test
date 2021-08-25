@@ -1,0 +1,4 @@
+    - run: echo "This step is also shared!"
+      shell: bash
+    - run: echo "it works!"
+      shell: bash
