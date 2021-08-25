@@ -1,21 +1,20 @@
-name: Experiment
+name: Run included workflows
 
-on: [workflow_dispatch, push]
+on: [workflow_dispatch]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - uses: actions/checkout@v2
 
-    # Use workflow snippet
-    - uses: cschleiden/include-workflow@9febb7ea07ee1cac32c6a7dfdd919692c40ced61
+    - uses: cschleiden/include-workflow@main
       with:
-        workflow-steps: ${{github.workspace}}/.github/workflows/shared/snippet.yml
-    # Until composite actions support `uses`, we have to run the generated action here
-    - uses: ./included
+        workflow-steps: ${{ github.workspace }}/.github/workflows/shared/snippet.yml
+        
+    - uses: cschleiden/include-workflow@main
+      with:
+        workflow-steps: ${{ github.workspace }}/.github/workflows/shared/snippet2.yml
